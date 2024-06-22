@@ -70,18 +70,17 @@ export default function OrderListTable({orderList, totalPrice}: {orderList: Food
                 <tr>
                     {orderResponse && orderResponse.success === true &&
                     <td colSpan={3}>
-                        <div>
+                        <>
                             <h1>주문 성공~!</h1>
                             <h3>주문 영수증</h3>
                             <h4>주문번호 : {orderNumber}</h4>
-                            <div>
+                            <>
                                 {orderResponse.order.map((menu: Food, idx) => (
                                     <OrderList menu={menu} idx={idx} key={`receipt-${idx}`}/>
                                 ))}
-                            </div>
+                            </>
                             <div style={{fontSize: '30px'}}>총 결제금액 : {totalPrice}원</div>
-                        </div>
-                        
+                        </>
                     </td>}
                 </tr>
         </>

@@ -59,8 +59,14 @@ app.get('/restaurants', (req, res) => {
 });
 
 app.post('/orders', (req, res) => {
-    const { menu, totalPrice }: Order = req.body;
-    console.log(`menu, totalPrice : ${JSON.stringify(menu)}, ${totalPrice}`);
+    const order: Order[] = req.body;
+    
+    if(order.length > 0) {
+        res.send({ success: true,  message: '주문 성공!', order});
+    } else {
+        res.send({ success: false,  message: '주문 내역을 다시 확인해주세요.'});
+    }
+    // console.log(`menu, totalPrice : ${JSON.stringify(menu)}, ${totalPrice}`);
 })
 
 app.listen(port, () => {
