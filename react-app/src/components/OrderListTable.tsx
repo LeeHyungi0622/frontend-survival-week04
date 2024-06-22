@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import axios from 'axios';
 import { Food } from '../types/Food';
 import OrderList from './OrderList';
 
@@ -25,28 +26,25 @@ export default function OrderListTable(
       return;
     }
 
-    await fetch('http://localhost:3000/orders', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(orderList),
-    })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        return response.json();
-      })
-      .then((data) => {
-        setOrderResponse(data);
-        if (data.success === true) {
-          orderNumber += 1;
-        }
-      })
-      .catch((error) => {
-        setOrderResponse(error);
+    try {
+      const response = await axios.post('http://localhost:3000/orders', orderList, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
       });
+
+      if (response.status !== 200) {
+        throw new Error('Network response was not ok');
+      }
+
+      const { data } = response;
+      setOrderResponse(data);
+      if (data.success === true) {
+        orderNumber += 1;
+      }
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
