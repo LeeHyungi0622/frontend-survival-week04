@@ -15,7 +15,6 @@ export default function App() {
       <Filter
         searchKeyword={searchKeyword}
         setSearchKeyword={setSearchKeyword}
-        filterKeyword={filterKeyword}
         setFilterKeyword={setFilterKeyword}
       />
       {searchKeyword}
