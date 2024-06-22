@@ -2,10 +2,13 @@
 import express from 'express';
 import { Restaurant } from './types/Restaurant';
 import { Order } from './types/Order';
+import cors from 'cors';
 
 const port = 3000;
 
 const app = express();
+
+app.use(cors());
 
 // 서버에서 클라이언트가 보낸 JSON 데이터를 제대로 파싱하기 위해 설정
 app.use(express.json());

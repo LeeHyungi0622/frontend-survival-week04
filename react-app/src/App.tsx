@@ -1,7 +1,38 @@
+import { ReactEventHandler, useEffect, useRef, useState } from "react";
+import Filter from "./components/Filter";
+import { Restaurant } from "./types/Restaurants";
+import useFetchRestaurants from "./hooks/useFetchRestaurants";
+import RestaurantsTable from "./components/RestaurantsTable";
+import filterRestaurants from "./utils/filterRestaurants";
+
 export default function App() {
+  const [searchKeyword, setSearchKeyword] = useState<string>('');
+  const [filterKeyword, setFilterKeyword] = useState<string>('');
+
+  const restaurants = filterRestaurants({searchKeyword, filterKeyword});
+
+
   return (
-    <p>
-      과제를 진행해 주세요.
-    </p>
+    <div>
+      <h1>푸드코트 키오스크</h1>
+      <Filter searchKeyword={searchKeyword} 
+              setSearchKeyword={setSearchKeyword} 
+              filterKeyword={filterKeyword}
+              setFilterKeyword={setFilterKeyword}/>
+      {searchKeyword}
+      {filterKeyword}
+      <table>
+        <thead>
+          <tr>
+            <th>종류</th>
+            <th>식당 이름</th>
+            <th>메뉴</th>
+          </tr>
+        </thead>
+        <tbody>
+          <RestaurantsTable restaurants={restaurants} />
+        </tbody>
+      </table>
+    </div>
   );
 }
