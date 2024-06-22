@@ -48,9 +48,7 @@ export default function OrderListTable({orderList, totalPrice}: {orderList: Food
     return (
         <>
             {orderList.map((order, idx) => (
-                <>
-                    <OrderList menu={order} idx={idx}/>
-                </>
+                <OrderList menu={order} idx={idx} key={`order-${idx}`} />
             ))}
                 <tr>
                     <td colSpan={2}>총 주문금액</td>
@@ -78,7 +76,7 @@ export default function OrderListTable({orderList, totalPrice}: {orderList: Food
                             <h4>주문번호 : {orderNumber}</h4>
                             <div>
                                 {orderResponse.order.map((menu: Food, idx) => (
-                                    <OrderList menu={menu} idx={idx}/>
+                                    <OrderList menu={menu} idx={idx} key={`receipt-${idx}`}/>
                                 ))}
                             </div>
                             <div style={{fontSize: '30px'}}>총 결제금액 : {totalPrice}원</div>

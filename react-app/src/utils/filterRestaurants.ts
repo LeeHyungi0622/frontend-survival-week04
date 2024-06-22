@@ -12,11 +12,7 @@ function normalize(text: string) {
 export default function filterRestaurants({searchKeyword, filterKeyword}: filterRestaurantsProps) {
     const {restaurants, fetchRestaurants} = useFetchRestaurants();
 
-    if (!filterKeyword) {
-        return restaurants;
-    }
-
-    const filteredRestaurantsByCategory = filterKeyword === '전체' ? restaurants :
+    const filteredRestaurantsByCategory = filterKeyword === '전체' || !filterKeyword ? restaurants :
                       restaurants.filter(restaurant => restaurant.category === filterKeyword);
     
     const query = normalize(searchKeyword);
