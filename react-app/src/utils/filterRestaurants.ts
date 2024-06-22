@@ -1,27 +1,27 @@
-import useFetchRestaurants from "../hooks/useFetchRestaurants";
+import useFetchRestaurants from '../hooks/useFetchRestaurants';
 
 type filterRestaurantsProps = {
-    searchKeyword: string, 
+    searchKeyword: string,
     filterKeyword: string
 };
 
 function normalize(text: string) {
-    return text.trim().toLocaleLowerCase();
+  return text.trim().toLocaleLowerCase();
 }
- 
-export default function filterRestaurants({searchKeyword, filterKeyword}: filterRestaurantsProps) {
-    const {restaurants, fetchRestaurants} = useFetchRestaurants();
 
-    const filteredRestaurantsByCategory = filterKeyword === '전체' || !filterKeyword ? restaurants :
-                      restaurants.filter(restaurant => restaurant.category === filterKeyword);
-    
-    const query = normalize(searchKeyword);
+export default function filterRestaurants(
+  { searchKeyword, filterKeyword }: filterRestaurantsProps,
+) {
+  const { restaurants } = useFetchRestaurants();
 
-    if (!query) {
-        return filteredRestaurantsByCategory;
-    }
+  const filteredRestaurantsByCategory = filterKeyword === '전체' || !filterKeyword ? restaurants
+    : restaurants.filter((restaurant) => restaurant.category === filterKeyword);
 
-    console.log(filteredRestaurantsByCategory.filter(restaurant => restaurant.name.includes(query)));
+  const query = normalize(searchKeyword);
 
-    return filteredRestaurantsByCategory.filter(restaurant => restaurant.name.includes(query));
+  if (!query) {
+    return filteredRestaurantsByCategory;
+  }
+
+  return filteredRestaurantsByCategory.filter((restaurant) => restaurant.name.includes(query));
 }

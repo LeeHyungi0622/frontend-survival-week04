@@ -1,24 +1,23 @@
-import { ReactEventHandler, useEffect, useRef, useState } from "react";
-import Filter from "./components/Filter";
-import { Restaurant } from "./types/Restaurants";
-import useFetchRestaurants from "./hooks/useFetchRestaurants";
-import RestaurantsTable from "./components/RestaurantsTable";
-import filterRestaurants from "./utils/filterRestaurants";
+import { useState } from 'react';
+import Filter from './components/Filter';
+import RestaurantsTable from './components/RestaurantsTable';
+import filterRestaurants from './utils/filterRestaurants';
 
 export default function App() {
   const [searchKeyword, setSearchKeyword] = useState<string>('');
   const [filterKeyword, setFilterKeyword] = useState<string>('');
 
-  const restaurants = filterRestaurants({searchKeyword, filterKeyword});
-
+  const restaurants = filterRestaurants({ searchKeyword, filterKeyword });
 
   return (
     <div>
       <h1>푸드코트 키오스크</h1>
-      <Filter searchKeyword={searchKeyword} 
-              setSearchKeyword={setSearchKeyword} 
-              filterKeyword={filterKeyword}
-              setFilterKeyword={setFilterKeyword}/>
+      <Filter
+        searchKeyword={searchKeyword}
+        setSearchKeyword={setSearchKeyword}
+        filterKeyword={filterKeyword}
+        setFilterKeyword={setFilterKeyword}
+      />
       {searchKeyword}
       {filterKeyword}
       <table>
