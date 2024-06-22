@@ -111,3 +111,5 @@ dist
 
 # CodeceptJS
 react-app/output/
+
+.DS_Store
