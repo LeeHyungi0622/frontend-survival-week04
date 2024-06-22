@@ -27,7 +27,7 @@ export default function RestaurantsTable({ restaurants } : {restaurants: Restaur
                   {' '}
                   /
                   {menu.price}
-                  <button type="button" onClick={() => selectMenu(menu)}>선택</button>
+                  <button type="button" name={`#${menu.name}`} onClick={() => selectMenu(menu)}>선택</button>
                 </div>
               </div>
             ))}
